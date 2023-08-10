@@ -318,10 +318,12 @@ public class FilePickerActivity extends AppCompatActivity
 
     public boolean requestPermission(String[] permissions, int requestCode) {
         int checkResult = PackageManager.PERMISSION_GRANTED;
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
-                checkResult = PackageManager.PERMISSION_DENIED;
-                break;
+        if (configs.isCheckPermission()) {
+            for (String permission : permissions) {
+                if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                    checkResult = PackageManager.PERMISSION_DENIED;
+                    break;
+                }
             }
         }
         if (checkResult != PackageManager.PERMISSION_GRANTED) {
